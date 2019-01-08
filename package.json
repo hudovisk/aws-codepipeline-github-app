@@ -1,0 +1,29 @@
+{
+  "name": "aws-codepipeline-github-app",
+  "version": "1.0.0",
+  "description": "The idea is to create a nodejs app running in heroku that receives webhooks from github and fires the desired code pipeline in aws to create multiple environments per PR.",
+  "main": "index.js",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hudovisk/aws-codepipeline-github-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hudovisk/aws-codepipeline-github-app/issues"
+  },
+  "homepage": "https://github.com/hudovisk/aws-codepipeline-github-app#readme",
+  "dependencies": {
+    "@octokit/rest": "^16.7.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0"
+  }
+}
