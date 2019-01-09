@@ -4,7 +4,8 @@ const defaults = {
   algorithm: "sha1"
 };
 
-module.exports = function(req, res, next) {
+module.exports = config => (req, res, next) => {
+  config = Object.assign({}, defaults, config);
   const rawBody = req.rawBody;
   if (!rawBody) {
     return res.status(500).send("Missing req.rawBody");
@@ -16,10 +17,7 @@ module.exports = function(req, res, next) {
     return res.status(400).send("Missing X-Hub-Signature header");
   } else {
     const body = Buffer.from(rawBody);
-    const hmac = crypto.createHmac(
-      defaults.algorithm,
-      process.env.GITHUB_WEBHOOK_SECRET
-    );
+    const hmac = crypto.createHmac(config.algorithm, config.secret);
     hmac.update(body, "utf-8");
 
     if (signature !== `${defaults.algorithm}=${hmac.digest("hex")}`) {
