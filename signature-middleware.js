@@ -22,7 +22,8 @@ module.exports = config => (req, res, next) => {
     const hmac = crypto.createHmac(config.algorithm, config.secret);
     hmac.update(body, "utf-8");
 
-    if (signature !== `${defaults.algorithm}=${hmac.digest("hex")}`) {
+    const expectedSignature = `${config.algorithm}=${hmac.digest("hex")}`;
+    if (signature !== expectedSignature) {
       console.log("Invalid X-Hub-Signature");
       return res.status(400).send("Invalid X-Hub-Signature");
     }
