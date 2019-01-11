@@ -33,17 +33,23 @@ async function createCheck(body) {
       identifier: "create"
     }
   ];
-  octokit.checks.create({
-    owner,
-    repo,
-    name,
-    head_sha,
-    status,
-    conclusion,
-    completed_at,
-    output,
-    actions
-  });
+  try {
+    await octokit.checks.create({
+      owner,
+      repo,
+      name,
+      head_sha,
+      status,
+      conclusion,
+      completed_at,
+      output,
+      actions
+    });
+    
+    console.log("created check");
+  } catch(e) {
+    console.error(e)
+  }
 }
 
 async function handleAction(body) {
@@ -80,6 +86,7 @@ async function handleAction(body) {
     output,
     actions
   });
+  console.log("updated check")
 }
 
 function handleCheckSuite(body) {
