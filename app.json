@@ -1,0 +1,30 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "GITHUB_APP_ID": {
+      "required": true
+    },
+    "GITHUB_APP_PEM": {
+      "required": true
+    },
+    "GITHUB_WEBHOOK_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "aws-codepipeline-github-app",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
